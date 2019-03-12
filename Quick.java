@@ -58,7 +58,17 @@ public class Quick{
   return the value that is the kth smallest value of the array. k=0 is the smallest
  */
  public static int quickselect(int[] data, int k) {
-   return -1;
+   int piv0;
+   piv0 = partition(data, 0, data.length -1); //partition once;
+   while (piv0 != k-1) {
+     if (k-1 > piv0) {
+       partition(data, piv0, data.length -1);
+     }
+     if (k -1 < piv0) {
+       partition(data, 0, piv0);
+     }
+   }
+   return data[piv0];
  }
 
  /*
