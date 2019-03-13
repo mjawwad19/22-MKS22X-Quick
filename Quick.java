@@ -76,7 +76,21 @@ public class Quick{
  public static void quicksort(int[] data) {
    quicksortH(data, 0, data.length -1);
  }
+  //yay recursion
  private static void quicksortH(int[] d, int s, int e){
+   //very similar to the format of quickselect
+   System.out.println(Arrays.toString(d));
+   if (s != e ) {
+     int piv = partition(d, s, e);
+     if (piv == s) quicksortH(d, piv +1, e); //go sort the rest above pivot
+     if (piv == e) quicksortH(d, s, e -1); //go sort the rest below pivot
+     else {
+       quicksortH(d, s, e -1);
+       quicksortH(d, piv + 1, e);
+       //do both as discussed in class for even faster cuz....
+       //GOTTA GO FAST SANIC GOTTA GO FAST SANIC SCREW N^2
+     }
+   }
  }
 
  //checks to see if partition did it's job
@@ -91,13 +105,13 @@ public class Quick{
  }
  public static void main(String[] args) {
    int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     for (int i = 0; i < array.length; i++){
+     /*for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
-     }
-   //quicksort(array); //0,0,1, 2, 3, 4, 999x6
+     }*/
+   quicksort(array); // [0,0,1, 2, 3, 4, 999x6]
    //System.out.println(array);
    int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
-   System.out.println(Arrays.toString(ary));
+   /*System.out.println(Arrays.toString(ary));
    //---------------- testing new and improved partition -----------//
    System.out.println(provePartition(ary, 0, ary.length -1, partition(ary, 0, ary.length -1))); //true
    //--testing quick select with new and improved partition---//
@@ -112,8 +126,8 @@ public class Quick{
    System.out.println(quickselect( ary , 4 )); // would return 15
    System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 5 )); // would return 23
-   System.out.println(Arrays.toString(ary));
-   //quicksort(ary);
-   //System.out.println(ary);*/
+   System.out.println(Arrays.toString(ary));*/
+   quicksort(ary);
+   System.out.println(Arrays.toString(ary)); //{0,2,5,10,15,23}
 }
 }
