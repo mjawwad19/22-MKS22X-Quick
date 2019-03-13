@@ -90,10 +90,10 @@ public class Quick{
    return true; // you have swapped correctly
  }
  public static void main(String[] args) {
-   /*int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     for (int i = 0; i < array.length -1; i++){
+   int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
+     for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
-     }*/
+     }
    //quicksort(array); //0,0,1, 2, 3, 4, 999x6
    //System.out.println(array);
    int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
