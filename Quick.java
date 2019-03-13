@@ -63,7 +63,7 @@ public class Quick{
    int e = data.length -1; //these are subject to change
    int piv =  partition(data, s, e); //partition once!
    while (piv!= k) {
-     if (piv > k) e = piv -1; //this means that k exists between s and piv
+     if (piv > k) e = piv -1; //this means that k exists betweenjava s and piv
      else s = piv + 1; //this means that k exists between piv and e
      piv = partition(data, s, e); //we should converge onto k sorted index.
    }
@@ -79,6 +79,16 @@ public class Quick{
  private static void quicksortH(int[] d, int s, int e){
  }
 
+ //checks to see if partition did it's job
+ private static boolean provePartition(int[] d, int s, int e, int pIX) {
+   int piv = d[pIX];
+   for (int i = s; i < e; i++) {
+     if ((i < pIX && d[i] > piv) || (i > pIX && d[i] < piv)) { //aka if it's on the left and not less than or on the right but less than
+        return false; //waa waaa check ur partition something isn't being swapped to the right side
+      }
+   }
+   return true; // you have swapped correctly
+ }
  public static void main(String[] args) {
    /*int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
      for (int i = 0; i < array.length -1; i++){
@@ -89,9 +99,7 @@ public class Quick{
    int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
    System.out.println(Arrays.toString(ary));
    //---------------- testing new and improved partition -----------//
-   /*System.out.println(partition(ary, 0, ary.length -1));
-   System.out.println(partition(ary, 0, ary.length -1));
-   System.out.println(partition(ary, 0, ary.length -1) + "\n\n\n");*/
+   System.out.println(provePartition(ary, 0, ary.length -1, partition(ary, 0, ary.length -1))); //true
    //--testing quick select with new and improved partition---//
    System.out.println(quickselect( ary , 0 )); //would return 0
    System.out.println(Arrays.toString(ary));
