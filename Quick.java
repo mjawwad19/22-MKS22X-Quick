@@ -17,9 +17,11 @@ public class Quick{
     if (data[start] == pVal) pIX = start; //the other
 
     //same as last time but now rewritten!
-    System.out.println("value @ pIX: " + data[pIX]);
-    System.out.println("pivot value " + pVal); //these should be the same;
-    swapper(data, start, pIX);
+    //System.out.println("value @ pIX: " + data[pIX]);
+    //System.out.println("pivot value " + pVal); //these should be the same;
+    data[pIX] = data[start];
+    data[start] = pVal;
+    pIX = start;
     start++;
 
     Random r = new Random();
@@ -34,11 +36,13 @@ public class Quick{
     }
     //the rest is still the same;
     if (data[start] < pVal) {
-      swapper(data, start, pIX);
+      data[pIX] = data[start];
+      data[start] = pVal;
       return start; //should now be the index of pivot
     }
     else {
-      swapper(data, start -1, pIX);
+      data[pIX] = data[start -1];
+      data[start -1] = pVal;
       return start -1;
     }
   }
@@ -55,15 +59,15 @@ public class Quick{
   return the value that is the kth smallest value of the array. k=0 is the smallest
  */
  public static int quickselect(int[] data, int k) {
-   int piv0;
-   System.out.println(Arrays.toString(data));
-   System.out.println("find the " + k + " smallest element");
-   piv0 = partition(data, 0, data.length -1); //partition once;
-   while (k != piv0) {
-     if (k < piv0) piv0 = partition(data, 0, piv0); //k is between 0 and piv0
-     else piv0 = partition(data, piv0, data.length -1);
+   int s = 0;
+   int e = data.length -1; //these are subject to change
+   int piv =  partition(data, s, e); //partition once!
+   while (piv!= k) {
+     if (piv > k) e = piv -1; //this means that k exists between s and piv
+     else s = piv + 1; //this means that k exists between piv and e
+     piv = partition(data, s, e); //we should converge onto k sorted index.
    }
-   return data[k]; //eventually as the looping continues, we will get a smaller range till eventually just 1 left.
+   return data[piv]; //return the value at the piv which is now k aka the k'th element sorted.
  }
 
  /*
@@ -85,15 +89,22 @@ public class Quick{
    int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
    System.out.println(Arrays.toString(ary));
    //---------------- testing new and improved partition -----------//
+   /*System.out.println(partition(ary, 0, ary.length -1));
    System.out.println(partition(ary, 0, ary.length -1));
-   System.out.println(partition(ary, 0, ary.length -1));
-   System.out.println(partition(ary, 0, ary.length -1));
-   /*System.out.println(quickselect( ary , 0 )); //would return 0
+   System.out.println(partition(ary, 0, ary.length -1) + "\n\n\n");*/
+   //--testing quick select with new and improved partition---//
+   System.out.println(quickselect( ary , 0 )); //would return 0
+   System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 1 )); // would return 2
+   System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 2 )); // would return 5
+   System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 3 )); // would return 10
+   System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 4 )); // would return 15
+   System.out.println(Arrays.toString(ary));
    System.out.println(quickselect( ary , 5 )); // would return 23
+   System.out.println(Arrays.toString(ary));
    //quicksort(ary);
    //System.out.println(ary);*/
 }
