@@ -79,7 +79,7 @@ public class Quick{
   //yay recursion
  private static void quicksortH(int[] d, int s, int e){
    //very similar to the format of quickselect
-   System.out.println(Arrays.toString(d));
+   //System.out.println(Arrays.toString(d));
    if (s != e ) {
      int piv = partition(d, s, e);
      if (piv == s) quicksortH(d, piv +1, e); //go sort the rest above pivot
@@ -129,5 +129,13 @@ public class Quick{
    System.out.println(Arrays.toString(ary));*/
    quicksort(ary);
    System.out.println(Arrays.toString(ary)); //{0,2,5,10,15,23}
-}
+   // B A B A B A B A B A C A D A B R A
+   // A is the smallest, then b, then r, then d, then c  e
+   int[] convert = new int[] {4, 2, 4, 2, 4, 2, 4, 2, 4, 2, 200, 2, 100, 2, 4, 6, 2};
+   quicksort(convert);
+   System.out.println(Arrays.toString(convert));
+   // A A A A A A A A B B B B B B R D C
+   // 2 2 2 2 2 2 2 2 4 4 4 4 4 4 6 100 200
+
+ }
 }
