@@ -42,6 +42,7 @@ public class Quick{
  */
  public static int quickselect(int[] data, int k) {
    int piv0;
+   System.out.println(Arrays.toString(data));
    System.out.println("find the " + k + " smallest element");
    piv0 = partition(data, 0, data.length -1); //partition once;
    while (k != piv0) {
@@ -58,10 +59,15 @@ public class Quick{
 
  public static void main(String[] args) {
    int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     System.out.println(Arrays.toString(array));
-     //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
      for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
      }
- }
+ int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23
+  System.out.println(quickselect( ary , 0 )); //would return 0
+  System.out.println(quickselect( ary , 1 )); // would return 2
+  System.out.println(quickselect( ary , 2 )); // would return 5
+  System.out.println(quickselect( ary , 3 )); // would return 10
+  System.out.println(quickselect( ary , 4 )); // would return 15
+  System.out.println(quickselect( ary , 5 )); // would return 23
+}
 }
