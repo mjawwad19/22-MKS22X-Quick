@@ -5,20 +5,17 @@ public class Quick{
     data[A] = data[B];
     data[B] = t;
   }
-  //partition  improvement a:
+  //partition  improvement a/b:
   private static int partition(int[]data, int start, int end) {
     if (start == end) return end; //nothing to do here
-    // ----------finding the median value ----------------//
+    // ----------finding the median value (a)----------------//
     int[] c = new int[] {data[start], data[data.length/2], data[end]};
     Arrays.sort(c);
     int pVal = c[1]; //1 would be the median value after being sorted.
     int pIX = data.length/2; //this is one of the 3 possibilities of the index of pVal;
     if (data[end] == pVal) pIX = end; //1 possibility for where p is.
     if (data[start] == pVal) pIX = start; //the other
-
-    //same as last time but now rewritten!
-    //System.out.println("value @ pIX: " + data[pIX]);
-    //System.out.println("pivot value " + pVal); //these should be the same;
+    //swap to front;
     data[pIX] = data[start];
     data[start] = pVal;
     pIX = start;
@@ -26,7 +23,7 @@ public class Quick{
 
     Random r = new Random();
     while (start != end) {
-      if (data[start] > pVal ||
+      if (data[start] > pVal || //improvement b 50 50
          (data[start] == pVal && r.nextInt() %2 == 0)) {
          //the 50/50 shot of landing on the righ tor left as discussed in class when equal to the pivoter
          swapper(data, start, end);
@@ -63,11 +60,11 @@ public class Quick{
    int e = data.length -1; //these are subject to change
    int piv =  partition(data, s, e); //partition once!
    while (piv!= k) {
-     if (piv > k) e = piv -1; //this means that k exists betweenjava s and piv
+     if (piv > k) e = piv -1; //this means that k exists between s and piv
      else s = piv + 1; //this means that k exists between piv and e
      piv = partition(data, s, e); //we should converge onto k sorted index.
    }
-   return data[piv]; //return the value at the piv which is now k aka the k'th element sorted.
+   return data[piv];
  }
 
  /*
@@ -76,10 +73,8 @@ public class Quick{
  public static void quicksort(int[] data) {
    quicksortH(data, 0, data.length -1);
  }
-  //yay recursion
+
  private static void quicksortH(int[] d, int s, int e){
-   //very similar to the format of quickselect
-   //System.out.println(Arrays.toString(d));
    if (s >= e) return;
    int pivot = partition(d, s, e);
    quicksortH(d, s, pivot -1); //sort below pivot
@@ -87,48 +82,13 @@ public class Quick{
  }
 
  //checks to see if partition did it's job
- private static boolean provePartition(int[] d, int s, int e, int pIX) {
+ /*private static boolean provePartition(int[] d, int s, int e, int pIX) {
    int piv = d[pIX];
    for (int i = s; i < e; i++) {
      if ((i < pIX && d[i] > piv) || (i > pIX && d[i] < piv)) { //aka if it's on the left and not less than or on the right but less than
-        return false; //waa waaa check ur partition something isn't being swapped to the right side
+        return false;
       }
    }
-   return true; // you have swapped correctly
- }
- public static void main(String[] args) {
-   int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     /*for (int i = 0; i < array.length; i++){
-       System.out.println("term " + i + ": "+ quickselect(array, i));
-     }*/
-   quicksort(array); // [0,0,1, 2, 3, 4, 999x6]
-   //System.out.println(array);
-   int[] ary = new int[] { 2, 10, 15, 23, 0,  5};  //sorted :  {0,2,5,10,15,23}
-   /*System.out.println(Arrays.toString(ary));
-   //---------------- testing new and improved partition -----------//
-   System.out.println(provePartition(ary, 0, ary.length -1, partition(ary, 0, ary.length -1))); //true
-   //--testing quick select with new and improved partition---//
-   System.out.println(quickselect( ary , 0 )); //would return 0
-   System.out.println(Arrays.toString(ary));
-   System.out.println(quickselect( ary , 1 )); // would return 2
-   System.out.println(Arrays.toString(ary));
-   System.out.println(quickselect( ary , 2 )); // would return 5
-   System.out.println(Arrays.toString(ary));
-   System.out.println(quickselect( ary , 3 )); // would return 10
-   System.out.println(Arrays.toString(ary));
-   System.out.println(quickselect( ary , 4 )); // would return 15
-   System.out.println(Arrays.toString(ary));
-   System.out.println(quickselect( ary , 5 )); // would return 23
-   System.out.println(Arrays.toString(ary));*/
-   quicksort(ary);
-   System.out.println(Arrays.toString(ary)); //{0,2,5,10,15,23}
-   // B A B A B A B A B A C A D A B R A
-   // A is the smallest, then b, then r, then d, then c  e
-   int[] convert = new int[] {4, 2, 4, 2, 4, 2, 4, 2, 4, 2, 200, 2, 100, 2, 4, 6, 2};
-   quicksort(convert);
-   System.out.println(Arrays.toString(convert));
-   // A A A A A A A A B B B B B B R D C
-   // 2 2 2 2 2 2 2 2 4 4 4 4 4 4 6 100 200
-
- }
+   return true;
+ }*/
 }
