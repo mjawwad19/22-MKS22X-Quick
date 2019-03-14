@@ -80,17 +80,10 @@ public class Quick{
  private static void quicksortH(int[] d, int s, int e){
    //very similar to the format of quickselect
    //System.out.println(Arrays.toString(d));
-   if (s != e ) {
-     int piv = partition(d, s, e);
-     if (piv == s) quicksortH(d, piv +1, e); //go sort the rest above pivot
-     if (piv == e) quicksortH(d, s, e -1); //go sort the rest below pivot
-     else {
-       quicksortH(d, s, e -1);
-       quicksortH(d, piv + 1, e);
-       //do both as discussed in class for even faster cuz....
-       //GOTTA GO FAST SANIC GOTTA GO FAST SANIC SCREW N^2
-     }
-   }
+   if (s >= e) return;
+   int pivot = partition(d, s, e);
+   quicksortH(d, s, pivot -1); //sort below pivot
+   quicksortH(d, pivot +1, e); //sort above pivot
  }
 
  //checks to see if partition did it's job
