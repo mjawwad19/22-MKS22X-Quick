@@ -75,7 +75,10 @@ public class Quick{
  }
 
  private static void quicksortH(int[] d, int s, int e){
-   if (s >= e) return;
+   if (e - s < 50) {
+     insertionsort(d, s, e);
+     return;
+   }
    int pivot = partition(d, s, e);
    quicksortH(d, s, pivot -1); //sort below pivot
    quicksortH(d, pivot +1, e); //sort above pivot
@@ -91,4 +94,16 @@ public class Quick{
    }
    return true;
  }*/
+
+ private static void insertionsort(int[] d, int l, int h) {
+   for (int i = l + 1; i < h + 1; i++) {
+    int temp = d[i];
+    int j = i;
+    while (j > l && temp < d[j-1]) {
+      d[j] = d[j-1];
+      j--;
+    }
+    d[j] = temp; //swap
+   }
+ }
 }
